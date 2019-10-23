@@ -11,7 +11,6 @@ Language: C++ 14
 #include <stack>
 #include <queue>
 #include <set>
-#include <unordered_set>
 #include <bitset>
 #include <iomanip>
 #include <climits>
@@ -87,9 +86,53 @@ int mod_ex(ll a, ll b, int m)
 */
 
 int main() {
-	// ios_base::sync_with_stdio(false);
-	// cin.tie(NULL);
-	// cout.tie(NULL);
+	int T;
+	cin >> T;
+
+	int N, c, a, b, t1, t2;
+	while (T--) {
+		cin >> N;
+
+		t1 = t2 = 0;
+
+		while (N--) {
+			cin >> c >> a >> b;
+
+			// cout << "Team 1: " << t1 << " Team 2: " << t2 << "\n";
+
+			if (c == 1) {
+				t1 = a;
+				t2 = b;
+
+				cout << "YES\n";
+			}
+
+			else if (a == b) {
+				cout << "YES\n";
+				t1 = a;
+				t2 = b;
+			}
+
+			else {
+				if (a < t1 || b < t2 || a < t2 || b < t1) {
+					cout << "YES\n";
+
+					if (a < t1 || b < t2) {
+						t2 = a;
+						t1 = b;
+					}
+
+					else {
+						t1 = a;
+						t2 = b;
+					}
+				}
+
+				else
+					cout << "NO\n";
+			}
+		}
+	}
 
 	return 0;
 }
