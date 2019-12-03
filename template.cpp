@@ -16,6 +16,7 @@ Language: C++ 14
 #include <iomanip>
 #include <climits>
 #include <string>
+#include <cstring>
 #include <cmath>
 
 using namespace std;
