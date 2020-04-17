@@ -28,21 +28,6 @@ typedef pair <int, int> pii;
 typedef pair <int, pii> piii;
 typedef unsigned long long ull;
 typedef long long ll;
-typedef pair <ll, ll> pll;
-
-/*
-//	GRAPHS
-const int N_MAX = 1e5+5;
-
-vector <int> G[N_MAX];
-vector <piii> G[N_MAX];
-vector <bool> vis(N_MAX);
-
-void init()
-{
-	for (int i = 0; i < N_MAX; i++)
-		vis[i] = 0;
-}
 
 //	SIEVE
 const int sieve_max = 1e7;
@@ -62,39 +47,47 @@ void sieve()
 		for (int j = i*i; j < sieve_max; j+=i)
 			prime[j] = false;
 	}
-
-	for (int i = 0; i < sieve_max; i++)
-		if (prime[i])
-			cout << i << " ";
 }
 
-//	Binary Exponentiation
-int mod_ex(ll a, ll b, int m)
-{
-	if (b == 0)
-		return 1;
-
-	long long int res = mod_ex(a, b/2, m);
-	res *= res;
-	res %= m;
-
-	if (b % 2)
-	{
-		res *= a;
-		res %= m;
+bool solve(int x, int n) {
+	string s1 = "";
+	while (x) {
+		s1 += (x%10)+48;
+		x /= 10;
 	}
 
-	return res;
+	string s2 = s1;
+	reverse(s2.begin(), s2.end());
+
+	string s3 = "";
+	int temp = n;
+	while (n) {
+		s3 += (n%10)+48;
+		n /= 10;
+	}
+
+	int num = 0;
+	for (auto i : s1) {
+		num *= 10;
+		num += (i-48);
+	}
+
+	// cout << s1 << " " << s2 << " " << num << " " << temp << "\n";
+
+	return ((s1 != s2) && num <= temp && prime[num]);
 }
 
-//  Trim Leading 0s
-str.erase(0, min(str.find_first_not_of('0'), str.size()-1));
-*/
-
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	sieve();
+
+	int n;
+	cin >> n;
+
+	for (int i = 1; i <= n; i++) {
+		if (prime[i] && solve(i, n)) cout << i << " ";
+	}
+
+	cout << "\n";
 
 	return 0;
 }

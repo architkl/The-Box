@@ -29,20 +29,33 @@ typedef pair <int, pii> piii;
 typedef unsigned long long ull;
 typedef long long ll;
 
-const int K = 1e9+7;
+int solve(vector <int> v, int pos, int n, int k, int sum) {
+	if (sum == k) return 1;
+
+	if (pos == n) return 0;
+
+	int ans = solve(v, pos+1, n, k, sum+v[pos]);
+	if (ans) {
+		cout << v[pos] << " ";
+		return 1;
+	}
+
+	ans = solve(v, pos+1, n, k, sum);
+	return ans;
+}
 
 int main() {
-	int n, m;
-	cin >> n >> m;
+	int n, k;
+	cin >> n;
 
-	vector < vector < vector <int> > > dp(m+1, vector < vector <int> > (n+1, vector <int> (n+1)));
-	for (int i = 1; i <= m; i++) {
-		for (int j = 1; j <= n; j++) {
-			for (int k = j; k <= n; k++) {
-				
-			}
-		}
-	}
+	vector <int> v(n);
+	for (int i = 0; i < n; i++) cin >> v[i];
+
+	cin >> k;
+
+	if (solve(v, 0, n, k, 0) == 0) cout << "null\n";
+
+	cout << "\n";
 
 	return 0;
 }

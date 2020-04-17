@@ -30,45 +30,8 @@ typedef unsigned long long ull;
 typedef long long ll;
 typedef pair <ll, ll> pll;
 
-/*
-//	GRAPHS
-const int N_MAX = 1e5+5;
+const int K = 998244353;
 
-vector <int> G[N_MAX];
-vector <piii> G[N_MAX];
-vector <bool> vis(N_MAX);
-
-void init()
-{
-	for (int i = 0; i < N_MAX; i++)
-		vis[i] = 0;
-}
-
-//	SIEVE
-const int sieve_max = 1e7;
-
-vector <bool> prime(sieve_max, 1);
-
-void sieve()
-{
-	prime[0] = 0;
-	prime[1] = 0;
-
-	for (int i = 2; i*i < sieve_max; i++)
-	{
-		if (!prime[i])
-			continue;
-
-		for (int j = i*i; j < sieve_max; j+=i)
-			prime[j] = false;
-	}
-
-	for (int i = 0; i < sieve_max; i++)
-		if (prime[i])
-			cout << i << " ";
-}
-
-//	Binary Exponentiation
 int mod_ex(ll a, ll b, int m)
 {
 	if (b == 0)
@@ -87,14 +50,30 @@ int mod_ex(ll a, ll b, int m)
 	return res;
 }
 
-//  Trim Leading 0s
-str.erase(0, min(str.find_first_not_of('0'), str.size()-1));
-*/
-
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	int n;
+	cin >> n;
+
+	ll res, b, nb;
+	for (int x = 1; x < n; x++) {
+		b = mod_ex(10, n-x-1, K);
+		b *= 18;
+		b %= K;
+
+		nb = mod_ex(10, n-x-2, K);
+		nb *= 81;
+		nb %= K;
+		nb *= (n-x+1-2);
+		nb %= K;
+
+		res = (b + nb) % K;
+		res *= 10;
+		res %= K;
+
+		cout << res << " ";
+	}
+
+	cout << 10 << "\n";
 
 	return 0;
 }
