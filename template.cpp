@@ -87,6 +87,22 @@ int mod_ex(ll a, ll b, int m)
 	return res;
 }
 
+//  Extended GCD
+ll extended_gcd(ll a, ll b, ll &x, ll &y) {
+	if (b == 0) {
+		x = 1;
+		y = 0;
+		return a;
+	}
+
+	ll x1, y1;
+	ll g = extended_gcd(b, a%b, x1, y1);	
+	x = y1;
+	y = x1 - (a/b) * y1;
+
+	return g;
+}
+
 //  Trim Leading 0s
 str.erase(0, min(str.find_first_not_of('0'), str.size()-1));
 */
